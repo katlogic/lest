@@ -33,7 +33,7 @@ ffi = {
 	arith_int64 = {lj20},
 	bit64 = {lj20},
 	new = {lj20},
-}
+},
 
 jit = {
 },
