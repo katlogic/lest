@@ -97,7 +97,11 @@ for _,d in ipairs(dirs) do
 		log(">> ",d,"/")
 		for f in dir(d) do
 			local fn = d .. "/" .. f
-			local ok, msg = popf(fn, "2>&1")
+			local alist = { fn, "2>&1" }
+			if d == 'nojit' then
+				alist = { '-joff', fn, '2>&1' }
+			end
+			local ok, msg = popf(unpack(alist))
 			local stat = '.'
 			if not ok then
 				if is_deviant(d,f) then

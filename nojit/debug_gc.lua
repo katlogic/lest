@@ -1,6 +1,6 @@
 
 -- Do not run this test unless the JIT compiler is turned off.
-if jit and jit.status and jit.status() then return end
+assert(not(jit and jit.status and jit.status()), 'disable jit')
 
 local caught, caught_line, caught_mm
 
