@@ -10,8 +10,6 @@ local lj = "^LuaJIT.*"
 return {
 
 lua = {
-	argcheck = {lj20},
-	libfuncs = {lj20},
 	table_misc = {lj20},
 	getfenv = {lua52up},
 	mod0 = {lua53},
@@ -38,9 +36,9 @@ ffi = {
 }
 
 jit = {
-}
+},
 
 nojit = {
-}
+},
 
 }
