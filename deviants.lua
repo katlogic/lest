@@ -26,7 +26,7 @@ lua = {
 	string_sub = {lua51},
 	string_op2 = {lua51},
 	xpcall = {lua51},
-	gotolabel = {lj} -- lj bug?
+	gotolabel = {lua} -- lua bug?
 },
 
 ffi = {
