@@ -25,7 +25,7 @@ do
   x = 0; for i=1,100 do x = not (t ~= u) and 2 or 1 end ck(2, t, u)
 end
 
-do
+if jit then
   local bit = require("bit")
   local mt = { __eq = function(a, b) return true end }
   local tt = { [0] = setmetatable({}, mt), setmetatable({}, mt) }

@@ -1,9 +1,9 @@
 
 local function testgc(what, func)
   collectgarbage()
-  local oc = gcinfo()
+  local oc = gcinfo and gcinfo() or collectgarbage('count')
   func()
-  local nc = gcinfo()
+  local nc = gcinfo and gcinfo() or collectgarbage('count')
   assert(nc < oc*4, "GC step missing for "..what)
 end
 

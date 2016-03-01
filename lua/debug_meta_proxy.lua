@@ -1,0 +1,55 @@
+
+local what
+
+local function mm(a, b)
+  local dbg = debug.getinfo(1)
+  what = dbg.namewhat == "metamethod" and dbg.name or
+					  dbg.namewhat.." "..(dbg.name or "?")
+end
+
+local function ck(s)
+  assert(what == s, "bad debug info for metamethod "..s)
+end
+
+local mt = {
+  __index = mm,
+  __newindex = mm,
+  __eq = mm,
+  __add = mm,
+  __sub = mm,
+  __mul = mm,
+  __div = mm,
+  __mod = mm,
+  __pow = mm,
+  __unm = mm,
+  __len = mm,
+  __lt = mm,
+  __le = mm,
+  __concat = mm,
+  __call = mm,
+}
+
+local u = newproxy()
+local u2 = newproxy()
+debug.setmetatable(u, mt)
+debug.setmetatable(u2, mt)
+
+local x = u.x;		ck("__index")
+u.x = 1;		ck("__newindex")
+local x = u + u;	ck("__add")
+local x = u - u;	ck("__sub")
+local x = u * u;	ck("__mul")
+local x = u / u;	ck("__div")
+local x = u % u;	ck("__mod")
+local x = u ^ u;	ck("__pow")
+local x = -u;		ck("__unm")
+local x = #u;		ck("__len")
+local x = u..u;		ck("__concat")
+local x = u();		ck("local u")
+
+local x = u == u2;	ck("__eq")
+local x = u ~= u2;	ck("__eq")
+local x = u < u2;	ck("__lt")
+local x = u > u2;	ck("__lt")
+local x = u <= u2;	ck("__le")
+local x = u >= u2;	ck("__le")

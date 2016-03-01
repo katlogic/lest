@@ -1,5 +1,6 @@
 local x = ((1 or false) and true) or false
 assert(x == true)
+local loadstring = loadstring or load
 
 local basiccases = {
   {"nil", nil},

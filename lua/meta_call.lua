@@ -15,7 +15,7 @@ do
   assert(o == t and a == "foo" and b == "bar")
 end
 
-do
+if newproxy then
   local u = newproxy(true)
   getmetatable(u).__call = callmeta
 

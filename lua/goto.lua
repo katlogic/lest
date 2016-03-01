@@ -1,8 +1,10 @@
 
 -- Basic goto and label semantics.
+local loadstring = loadstring or load
 do
   local function expect(src, msg)
     local ok, err = loadstring(src)
+    print(ok,err,msg)
     if msg then
       assert(not ok and string.find(err, msg))
     else
@@ -104,18 +106,6 @@ do
     goto a
   until false
   assert(foo() == true)
-end
-
--- Label prevents joining to KNIL.
-do
-  local k = 0
-  local x
-  ::foo::
-  local y
-  assert(y == nil)
-  y = true
-  k = k + 1
-  if k < 2 then goto foo end
 end
 
 -- Break resolved from the right scope.

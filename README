@@ -1,0 +1,32 @@
+This is a portable test suite branched off from Mike's set of tests:
+https://github.com/LuaJIT/LuaJIT-test-cleanup with Lua test suites thrown in.
+
+However it is not LuaJIT specific - it tries to cover everything colloquially
+known as "Lua" - Lua 5.1 to 5.3, and LuaJIT - in a portable manner.
+
+This excludes C interfacing libraries (apart from those which come with target
+system, loaded via FFI) - it's a portability hell to compile those. C API
+testing would deserve a separate package focusing only on that.
+
+The suite is minimal as possible. Individual tests are self-contained, on
+purpose. This leads to a little bit of code duplication, but offers the
+advantage of having "clean slate" when examining a test failure. Tests
+are always executed in their own fresh instance of specified interpreter.
+
+Some tests are allowed to fail under certain conditions. These are known as
+"deviants", defined in deviants.lua. These are just the subtle differences
+between Lua versions. Note that even if we know a test would fail on given
+version, we run it anyway - maybe our Lua is hacked to have cross-version
+compatibility, state of which would be examined.
+
+Ideally deviants.lua should be an incompatibility matrix between common Lua
+versions.
+
+Directory structure (testing order):
+
+lua/ 		- common lua tests
+luajit/ 	- tests to run if luajit is detected
+ffi/ 		- tests to run if require('ffi') succeeds
+nojit/ 		- tests to run if luajit, but enforce interpreter
+jit/ 		- tests to run if luajit, but enforce jit
+deviants.lua 	- compatibility matrix

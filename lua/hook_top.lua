@@ -1,4 +1,5 @@
 
+local unpack = unpack or table.unpack
 local t = {}
 for i=1,26 do t[i] = string.char(96+i) end
 

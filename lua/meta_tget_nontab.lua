@@ -1,5 +1,5 @@
 
-do
+if newproxy then
   local u = newproxy(true)
   getmetatable(u).__index = { foo = u, bar = 42 }
 

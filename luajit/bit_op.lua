@@ -1,6 +1,6 @@
 -- Test cases for bit operations library. Public domain.
 
-local bit = require"bit"
+local bit = bit32 or require("bit")
 
 local vb = {
   0, 1, -1, 2, -2, 0x12345678, 0x87654321,
@@ -17,6 +17,7 @@ local function cksum(name, s, r)
 end
 
 local function check_unop(name, r)
+  print(name, bit[name])
   local f = bit[name]
   local s = ""
   if pcall(f) or pcall(f, "z") or pcall(f, true) then
@@ -61,13 +62,17 @@ assert(tostring(-1) == "-1", "broken tostring()")
 assert(tostring(0xffffffff) == "-1" or tostring(0xffffffff) == "4294967295", "broken tostring()")
 
 -- Basic argument processing.
+if jit then
 assert(bit.tobit(1) == 1)
+end
 assert(bit.band(1) == 1)
 assert(bit.bxor(1,2) == 3)
 assert(bit.bor(1,2,4,8,16,32,64,128) == 255)
 
 -- Apply operations to test vectors and compare checksums.
+if jit then
 check_unop("tobit", 277312)
+end
 check_unop("bnot", 287870)
 check_unop("bswap", 307611)
 

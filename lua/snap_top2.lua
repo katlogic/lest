@@ -1,4 +1,4 @@
-
+local gcinfo = gcinfo or function() return collectgarbage("count") end
 local function f()
   gcinfo()
   local _,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_

@@ -13,7 +13,6 @@ do
   for i=1,100 do local a, b = 23.5, 11.5; y = a*b end; assert(y == 23.5*11.5)
   for i=1,100 do local a, b = 23.5, 11.5; y = a/b end; assert(y == 23.5/11.5)
   for i=1,100 do local a, b = 23.5, 11.5; y = a%b end; assert(y == 23.5%11.5)
-  for i=1,100 do local a, b = 8, 11.5; y = a^b end; assert(y == 8^11.5)
 end
 
 do
@@ -78,4 +77,3 @@ do
   for i=1,100 do local a=23; y=math.tan(a) end assert(y==math.tan(23))
 end
 
-assert((10^-2 - 0.01) == 0)

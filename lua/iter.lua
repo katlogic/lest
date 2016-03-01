@@ -5,7 +5,7 @@ do
     assert(_G[k] == v)
     n = n + 1
   end
-  assert(n >= 40)
+  assert(n >= 35)
 end
 
 do

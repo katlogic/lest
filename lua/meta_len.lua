@@ -28,7 +28,7 @@ do
   end
 end
 
-do
+if newproxy then
   local u = newproxy(true)
   getmetatable(u).__len = function(o) return 42 end
   assert(#u == 42)

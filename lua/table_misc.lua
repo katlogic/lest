@@ -48,17 +48,6 @@ do
 	 t[6] == nil)
 end
 
--- table.new
-do
-  local tnew = require("table.new")
-  local x, y
-  for i=1,100 do
-    x = tnew(100, 30)
-    if i == 90 then y = x end
-  end
-  assert(x ~= y)
-end
-
 -- table.concat
 do
   local t = {a=1,b=2,c=3,d=4,e=5}

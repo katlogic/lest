@@ -1,3 +1,4 @@
+local bit = bit32 or require('bit')
 
 local band, bor = bit.band, bit.bor
 local byte = string.byte

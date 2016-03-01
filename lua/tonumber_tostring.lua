@@ -63,19 +63,6 @@ do
 end
 
 do
-  local x = false
-  local co = coroutine.create(function() print(1) end)
-  debug.setfenv(co, setmetatable({}, { __index = {
-    tostring = function() x = true end }}))
-  coroutine.resume(co)
-  assert(x == true)
-end
-
-do
-  assert(tonumber(111, 2) == 7)
-end
-
-do
   local t = setmetatable({}, { __tostring = "" })
   assert(pcall(function() tostring(t) end) == false)
 end
