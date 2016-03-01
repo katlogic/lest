@@ -29,7 +29,7 @@ do
   expect("do local v,w; goto a; end; local x; ::a:: local y", "'x'")
   expect("repeat goto a; local x; ::a:: until x", "'x'")
 
-  if os.getenv("LUA52") then
+  if (jit and rawlen) or (_VERSION ~= "Lua 5.1") then
     expect("goto = 1", "<name>")
   else
     expect("goto = 1")

@@ -119,5 +119,5 @@ for _,d in ipairs(dirs) do
 	end
 end
 
-log(">> Passed. Found ",#devs, " deviants: ", str(", ", unpack(devs)))
+log(">> Passed. Found ",#devs, " deviants: ", str(" ", unpack(devs)))
 logn()

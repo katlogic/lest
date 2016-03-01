@@ -85,7 +85,7 @@ do
     for i=1,100 do x = t1 < t2 end
     return x
   end)
-  if os.getenv("LUA52") then
+  if (jit and rawlen) or (_VERSION ~= "Lua 5.1") then
     assert(ok and ret == true)
   else
     assert(not ok)
@@ -95,7 +95,7 @@ do
     for i=1,100 do x = t1 <= t2 end
     return x
   end)
-  if os.getenv("LUA52") then
+  if (jit and rawlen) or (_VERSION ~= "Lua 5.1") then
     assert(ok and ret == true)
   else
     assert(not ok)

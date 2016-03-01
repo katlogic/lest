@@ -3,11 +3,9 @@ local lua52 = '^Lua 5%.2$'
 local lua53 = '^Lua 5%.3$'
 local lua = '^Lua 5%.[1-3]$'
 local lua52up = '^Lua 5%.[2-3]$'
-local lj52 = '^LuaJIT[^ ]+ 5%.2$'
-local lj51 = '^LuaJIT[^ ]+ 5%.1$'
 local lj20 = "^LuaJIT2%.0.*"
-local lj = "^LuaJIT.*"
 local lj21 = "^LuaJIT2%.1*"
+local lj = "^LuaJIT.*"
 
 return {
 
@@ -37,6 +35,12 @@ ffi = {
 	arith_int64 = {lj20},
 	bit64 = {lj20},
 	new = {lj20},
+}
+
+jit = {
+}
+
+nojit = {
 }
 
 }

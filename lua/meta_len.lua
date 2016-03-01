@@ -1,5 +1,5 @@
 
-local lua52 = os.getenv("LUA52")
+local lua52 = if (jit and rawlen) or (_VERSION ~= "Lua 5.1") then
 
 local mt = { __len = function(o, o2)
   if lua52 then
