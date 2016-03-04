@@ -16,6 +16,9 @@ else
   ]]
 end
 
+-- no errno
+if ffi.abi('win') and ffi.os == 'POSIX' then return end
+
 ffi.C.bar = 14
 assert(ffi.C.bar == 14)
 ffi.C.bar = 0

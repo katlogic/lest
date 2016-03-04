@@ -472,7 +472,8 @@ do
   end
 
   -- io.* file converts to file handle (as a void *)
-  if ffi.abi("win") then
+  if ffi.os == 'Windows' then
+    print(ffi.C._fileno(io.stderr))
     assert(ffi.C._fileno(io.stdout) == 1)
     assert(ffi.C._fileno(io.stderr) == 2)
     local x

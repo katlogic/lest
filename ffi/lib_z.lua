@@ -17,7 +17,7 @@ if ffi.abi("win") then
     unsigned long *dstlen);
   ]]
 
-  local ntdll = ffi.load("ntdll")
+  local ntdll = ffi.load("ntdll.dll")
 
   local fmt = 0x0102
   local workspace

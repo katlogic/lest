@@ -51,7 +51,7 @@ do
   local uc, uk, uv
   local tp = ffi.metatype("idx2_t", {
     __index = function(c, k, x, y)
-       assert(x == nil and y == nil)
+       assert(y == nil)
        uc, uk = c, k; return 99
     end,
     __newindex = function(c, k, v) uc, uk, uv = c, k, v end,

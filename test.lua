@@ -54,7 +54,7 @@ end
 logn(">> Using '",cmd,"', full command '",run,"'")
 local win32=(package.cpath:match("\\") and package.cpath:match("%.dll"))
 if win32 then
-	print(">> Detected win32 host")
+	logn(">> Detected win32 host")
 end
 
 local getver = '"print((jit and jit.version and jit.version:gsub(\' \',\'\') or \'Lua\') .. _VERSION:match(\'Lua(.*)\'))"'
@@ -101,23 +101,35 @@ for _,d in ipairs(dirs) do
 			if d == 'nojit' then
 				alist = { '-joff', fn, '2>&1' }
 			end
-			local ok, msg = popf(unpack(alist))
 			local stat = '.'
-			if not ok then
-				if is_deviant(d,f) then
-					stat = 'D'
-					table.insert(devs, fn)
-				elseif E.ESKIP=="1" then
-					stat = 'E'
-					errs[fn] = msg
+			if is_deviant('dont_run',fn) then
+				stat='S'
+			else
+				local ok, msg = popf(unpack(alist))
+				if E.TDEBUG then
+					log("  "..f.."...")
+					stat='OK'
+				end
+				if not ok then
+					if is_deviant(d,f) then
+						stat = 'D'
+						table.insert(devs, fn)
+					elseif E.ESKIP=="1" then
+						stat = 'E'
+						errs[fn] = msg
+					else
+						logn()
+						logn(">> Error in ",fn,"")
+						log(msg)
+						os.exit(1)
+					end
+				end
+				if E.TDEBUG then
+					logn(stat)
 				else
-					logn()
-					logn(">> Error in ",fn,"")
-					log(msg)
-					os.exit(1)
+					log(stat)
 				end
 			end
-			log(stat)
 		end
 		logn()
 	end

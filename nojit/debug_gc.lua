@@ -22,7 +22,7 @@ local function testgc(mm, f)
   local u = newproxy(true)
   getmetatable(u).__gc = gcmeta
   u = nil
-  for i=1,100000 do
+  for i=1,1000000 do
     f(i)
     -- This check may be hoisted. __gc is not supposed to have side-effects.
     if caught then break end
@@ -41,7 +41,9 @@ end
 local x
 testgc("__gc", function(i) x = {} end)
 testgc("__gc", function(i) x = {1} end)
+if _VERSION == 'Lua 5.1' then
 testgc("__gc", function(i) x = function() end end)
+end
 testgc("__concat", function(i) x = i.."" end)
 
 caught = "end"

@@ -38,7 +38,7 @@ end
 
 assert(ffi.C.pow(2.5, 5) == 97.65625)
 
-if ffi.abi("win") then
+if ffi.os == 'Windows' then
   do
     local buf = ffi.new("char[?]", 4, "abc")
     C.CharUpperA(buf)
@@ -62,13 +62,8 @@ if ffi.abi("win") then
   ffi.C._fmode = ffi.C._O_TEXT
 else
   assert(ffi.C.rmdir("/tmp/does_not_exist") == -1)
-  assert(ffi.C.errno == 2)
-
-  ffi.C.errno = 17
-  assert(ffi.C.errno == 17)
-  ffi.C.errno = 0
+  assert(ffi.errno() == 2)
 end
-
 do
   local L = C.luaL_newstate()
   local s = "local x = 0; for i=1,100 do x=x+i end; return x"
@@ -80,7 +75,7 @@ do
 end
 
 do
-  if not (ffi.os == "Windows" or ffi.os == "Other") then
+  if not (ffi.os == "Windows" or ffi.os == "Other" or ffi.abi('win')) then
     ffi.load("pthread")
   end
 end

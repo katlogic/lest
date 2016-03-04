@@ -109,7 +109,7 @@ checktypes{
 }
 
 -- ABI-specific types:
-local L = (ffi.abi("32bit") or ffi.abi("win")) and 4 or 8
+local L = (ffi.abi("32bit") or ffi.os == 'Windows') and 4 or 8
 local P = ffi.abi("32bit") and 4 or 8
 local W = ffi.abi("win") and 2 or 4
 
