@@ -13,16 +13,16 @@ return {
 -- if some test gets stuck completely, put it in here
 dont_run = {
 	["ffi/callback"] = {ljx},
-	["lua/closure"] = {lj},
+	["lua/closure"] = {lj,ljx},
 	["lua/stackov"] = {lua51},
 },
 
 lua = {
-	utf8 = {lj,lua51,lua52},
-	calls53 = {lj,lua51},
-	files = {lj},
-	literals = {lj},
-	nextvar = {lj},
+	utf8 = {lj,lua51,lua52,ljx},
+	calls53 = {lj,lua51,ljx},
+	files = {lj,ljx},
+	literals = {lj,ljx},
+	nextvar = {lj,ljx},
 	env = {lj,lua51},
 	table_misc = {lj20},
 	getfenv = {lua52up},
@@ -33,6 +33,7 @@ lua = {
 	coro_pcall = {lua51},
 	debug_meta = {lua51},
 	debug_meta_proxy = {lua},
+	kfold = {ljx},
 	kfold2 = {lua51,lj21}, -- lj bug?
 	kfold3 = {lua51,lj21}, -- lj bug?
 	parse_esc = {lua51},
@@ -45,10 +46,10 @@ lua = {
 },
 
 ffi = {
-	arith_int64 = {lj20,ljx},
+	arith_int64 = {lj20},
 	bit64 = {lj20},
 	new = {lj20},
-	jit_arith = {ljx},
+	--jit_arith = {ljx},
 },
 
 luajit = {

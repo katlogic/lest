@@ -1,5 +1,6 @@
 -- $Id: pm.lua,v 1.45 2015/10/08 15:59:24 roberto Exp $
 
+local _soft = true
 print('testing pattern matching')
 
 local function checkerror (msg, f, ...)

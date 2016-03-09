@@ -8,6 +8,7 @@ do
   for i=1,100 do x = x + a[i]; y = y - a[i]; m = -a[i] end
   assert(x == 5050)
   assert(y == -5050)
+  print(m)
   assert(m == -100)
   local z, z0 = 1ll, 3ll
   for i=1,100 do z = a[i] * z0 end

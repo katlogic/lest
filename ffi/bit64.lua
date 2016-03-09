@@ -95,6 +95,7 @@ do
     a = a - b; b = shl(b, 5) + sar(b, 59)
     b = bxor(a, b); b = b - shl(b, 13) - shr(b, 51)
   end
+  print(b)
   assert(b == -7993764627526027113LL)
 end
 

@@ -69,6 +69,7 @@ assert(type(f) == 'function')
 
 local function getenv (f)
   local a,b = debug.getupvalue(f, 1)
+  print(a,b)
   assert(a == '_ENV')
   return b
 end
@@ -82,7 +83,7 @@ f()
 assert(c.a == 3)
 
 -- old test for limits for special instructions (now just a generic test)
-do
+if not jit then
   local i = 2
   local p = 4    -- p == 2^i
   repeat

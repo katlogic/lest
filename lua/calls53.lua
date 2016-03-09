@@ -250,6 +250,7 @@ assert(not load(function () return true end))
 -- small bug
 local t = {nil, "return ", "3"}
 f, msg = load(function () return table.remove(t, 1) end)
+print(f,msg)
 assert(f() == nil)   -- should read the empty chunk
 
 -- another small bug (in 5.2.1)
