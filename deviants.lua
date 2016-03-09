@@ -5,16 +5,25 @@ local lua = '^Lua 5%.[1-3]$'
 local lua52up = '^Lua 5%.[2-3]$'
 local lj20 = "^LuaJIT2%.0.*"
 local lj21 = "^LuaJIT2%.1.*"
-local lj = "^LuaJIT.*"
-local ljx = "^LuaJIT.*5%.[23]$"
+local lj   = "^LuaJIT2%.1%.0%-beta[1-9] .*"
+local ljx  = "^LuaJIT.*LJX.*"
 
 return {
 
+-- if some test gets stuck completely, put it in here
 dont_run = {
 	["ffi/callback"] = {ljx},
+	["lua/closure"] = {lj},
+	["lua/stackov"] = {lua51},
 },
 
 lua = {
+	utf8 = {lj,lua51,lua52},
+	calls53 = {lj,lua51},
+	files = {lj},
+	literals = {lj},
+	nextvar = {lj},
+	env = {lj,lua51},
 	table_misc = {lj20},
 	getfenv = {lua52up},
 	mod0 = {lua53},

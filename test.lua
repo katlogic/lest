@@ -27,6 +27,7 @@ local run = str(" ", cmd, unpack(arg, pos))
 
 local function log(...)
 	io.stdout:write(str("",...))
+	io.stdout:flush()
 end
 
 local function logn(...)
@@ -108,13 +109,13 @@ for _,d in ipairs(dirs) do
 				local ok, msg = popf(unpack(alist))
 				if E.TDEBUG then
 					log("  "..f.."...")
-					stat='OK'
+					stat = 'OK'
 				end
 				if not ok then
 					if is_deviant(d,f) then
 						stat = 'D'
 						table.insert(devs, fn)
-					elseif E.ESKIP=="1" then
+					elseif E.TSKIP=="1" then
 						stat = 'E'
 						errs[fn] = msg
 					else
@@ -124,10 +125,10 @@ for _,d in ipairs(dirs) do
 						os.exit(1)
 					end
 				end
-				if E.TDEBUG then
-					logn(stat)
-				else
+				if E.TDEBUG ~= "1" then
 					log(stat)
+				else
+					logn(stat)
 				end
 			end
 		end
@@ -136,4 +137,7 @@ for _,d in ipairs(dirs) do
 end
 
 log(">> Passed. Found ",#devs, " deviants: ", str(" ", unpack(devs)))
+if #errs ~= 0 then
+	log(">> Failing tests: ", str(" ", unpact(errs)))
+end
 logn()

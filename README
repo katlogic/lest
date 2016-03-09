@@ -1,25 +1,48 @@
-This is a portable test suite branched off from Mike's set of tests:
-https://github.com/LuaJIT/LuaJIT-test-cleanup with Lua test suites thrown in.
+This is a sanity/regression test suite for everything colloquially known as
+"Lua" - Lua 5.1 to 5.3, and LuaJIT 2.0/2.1. It has no external dependencies
+other than Lua itself and should run on all POSIX platforms and Win32.
 
-However it is not LuaJIT specific - it tries to cover everything colloquially
-known as "Lua" - Lua 5.1 to 5.3, and LuaJIT - in a portable manner.
+To use it, simply launch test.lua in its directory:
 
-This excludes C interfacing libraries (apart from those which come with target
-system, loaded via FFI) - it's a portability hell to compile those. C API
-testing would deserve a separate package focusing only on that.
+$ lua test.lua
 
-The suite is minimal as possible. Individual tests are self-contained, on
-purpose. This leads to a little bit of code duplication, but offers the
-advantage of having "clean slate" when examining a test failure. Tests
-are always executed in their own fresh instance of specified interpreter.
+You can specify particular interpreter to test, for example:
 
-Some tests are allowed to fail under certain conditions. These are known as
-"deviants", defined in deviants.lua. These are just the subtle differences
-between Lua versions. Note that even if we know a test would fail on given
-version, we run it anyway - maybe our Lua is hacked to have cross-version
-compatibility, state of which would be examined.
+$ lua test.lua /usr/local/bin/lua5.3
 
-Ideally deviants.lua should be an incompatibility matrix between common Lua
+And finally, you can specify command line options for target interpreter:
+
+$ lua test.lua /usr/local/bin/luajit -Joff
+
+Behavior can be changed through the following environment variables:
+
+TSKIP  - skip errors (print 'E' instead of abort)
+TDEBUG - verbosely display tests performed
+TFILTER- Lua pattern of tests to take (for example "^lua/.*")
+
+The tests are based on:
+  https://github.com/LuaJIT/LuaJIT-test-cleanup
+  http://www.lua.org/tests/
+
+All tests are self-contained, on purpose. This leads to a little bit of code
+duplication, but offers the advantage of having "clean slate" when examining
+a test failure. Tests are always executed in their own fresh instance of
+specified interpreter.
+
+The tests exclude C interface (apart from libraries which come with target
+system, and can be loaded via FFI). It's a portability hell to deal with those,
+plus it inevitably introduces dependencies.
+
+C API testing would deserve a separate  package focusing only on that.
+
+Some tests are allowed to fail under certain circumstances. These are known as
+"deviants", defined in deviants.lua. Usually they are the subtle differences
+between Lua versions, but also known bugs. Note that even if we know a test
+would fail on given version, we run it anyway - maybe our Lua is hacked to
+have cross-version compatibility, or bug fixed - state of which would be
+determined.
+
+Ideally deviants.lua should be only incompatibility matrix between common Lua
 versions.
 
 Directory structure (testing order):
